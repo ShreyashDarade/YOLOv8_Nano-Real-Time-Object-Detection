@@ -1,5 +1,9 @@
 #  Project
 
+## ⚠️ Disclaimer
+
+This project is intended to be run **only on a local machine**. Running it on cloud-based environments or remote servers may lead to unexpected behavior or require additional configurations.
+
 ## 📌 Description
 
 This project implements and explores the YOLOv8 (You Only Look Once) object detection model using a Jupyter Notebook. The notebook contains code for loading, training, and testing the YOLOv8 model on a dataset.
@@ -34,9 +38,6 @@ pip install ultralytics opencv-python numpy matplotlib
    ```
 3. Run the cells sequentially to execute the code.
 
-## ⚠️ Disclaimer
-
-This project is intended to be run **only on a local machine**. Running it on cloud-based environments or remote servers may lead to unexpected behavior or require additional configurations.
 
 ## 📜 License
 
