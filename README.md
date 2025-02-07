@@ -29,8 +29,8 @@ pip install ultralytics opencv-python numpy matplotlib
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone <[repository-url](https://github.com/ShreyashDarade/YOLOv8_Nano-Real-Time-Object-Detection)>
+   cd <[repository-folde](https://github.com/ShreyashDarade/YOLOv8_Nano-Real-Time-Object-Detection)r>
    ```
 2. Open the Jupyter Notebook:
    ```bash
