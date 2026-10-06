@@ -1,25 +1,19 @@
-.PHONY: install lint test train eval export benchmark realtime
+.PHONY: install lint test test-integration run docker
 
 install:
-	pip install -e ".[dev]"
+	pip install -e ".[dev,yolo]"
 
 lint:
-	ruff check src tests
+	ruff check app tests
 
 test:
 	pytest
 
-train:
-	yolo-nano train --config configs/default.yaml
+test-integration:
+	pytest -m integration -o addopts=""
 
-eval:
-	yolo-nano eval --config configs/default.yaml
+run:
+	uvicorn app.main:create_app --factory --host 0.0.0.0 --port 8000 --reload
 
-export:
-	yolo-nano export --config configs/default.yaml
-
-benchmark:
-	yolo-nano benchmark --config configs/default.yaml
-
-realtime:
-	yolo-nano realtime --config configs/default.yaml
+docker:
+	docker build -t yolo-nano-api .

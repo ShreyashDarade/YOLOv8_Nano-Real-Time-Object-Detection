@@ -3,32 +3,43 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "yolo-nano"
-version = "0.1.0"
-description = "Train, evaluate, benchmark, export and run real-time object detection with YOLOv8 Nano."
+name = "yolo-nano-api"
+version = "1.0.0"
+description = "Production-grade HTTP API for YOLOv8 Nano object detection."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "ultralytics>=8.2",
-    "opencv-python>=4.8",
-    "PyYAML>=6.0",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "python-multipart>=0.0.9",
+    "pydantic-settings>=2.2",
+    "Pillow>=10",
+    "numpy>=1.24",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=7", "ruff>=0.4"]
-
-[project.scripts]
-yolo-nano = "yolo_nano.cli:main"
+# The ML stack is optional so tests/CI run without PyTorch.
+yolo = ["ultralytics>=8.2", "opencv-python-headless>=4.8"]
+dev = ["pytest>=7", "pytest-asyncio>=0.23", "httpx>=0.27", "ruff>=0.4"]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+include = ["app*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+markers = ["integration: needs ultralytics and downloadable weights"]
+addopts = "-m 'not integration'"
 
 [tool.ruff]
 line-length = 100
-src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.File"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]
