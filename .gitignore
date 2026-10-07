@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# Training / inference artifacts
+runs/
+datasets/
+*.pt
+*.onnx
+*.engine
+*.tflite
+*.mp4
+!assets/*
